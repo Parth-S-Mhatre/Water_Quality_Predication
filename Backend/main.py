@@ -45,3 +45,11 @@ def predict(sample: WaterSample):
     pred = model.predict(data_scaled)
 
     return {"potability": int(pred[0])}
+
+@app.get("/")
+def root():
+    return {"message": "Water Quality Prediction API", "status": "running"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "model_loaded": model is not None}
